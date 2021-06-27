@@ -10,7 +10,12 @@ const App = () => {
         if (localStorage.getItem('token')) {
             store.checkAuth();
         }
-    }, [])
+    }, []);
+
+    if (store.isLoading) {
+        return <div>Loading...</div>
+    }
+
 
     if (!store.isAuth) {
         return (
@@ -20,7 +25,7 @@ const App = () => {
 
     return (
         <div>
-            <h1>{store.isAuth ? `User has logged ${store.user.email}` : "Authorization"}</h1>
+            <h1>{store.isAuth ? `User has logged ${store?.user?.email}` : "Authorization"}</h1>
             <button onClick={() => store.logout()}>Exit</button>
         </div>
     );

@@ -7,18 +7,23 @@ export default class Store {
 
     user = {};
     isAuth = false;
+    isLoading = false;
 
     constructor() {
         makeAutoObservable(this)
-    }
+    };
 
     setAuth(bool) {
         this.isAuth = bool;
-    }
+    };
 
     setUser(user) {
         this.user = user;
-    }
+    };
+
+    setLoading(bool) {
+        this.isLoading = bool;
+    };
 
     async login(email, password) {
         try {
@@ -56,14 +61,17 @@ export default class Store {
     }
 
     async checkAuth() {
+        this.setLoading(true);
         try {
             const response = await axios.get(`api/refresh`, {withCredentials: true, baseURL: API_URL});
             console.log(response)
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user)
-        } catch(err) {
+        } catch (err) {
             console.log(err)
+        } finally {
+            this.setLoading(false);
         }
     }
 }
