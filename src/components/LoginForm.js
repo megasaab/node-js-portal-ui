@@ -48,6 +48,12 @@ const LoginForm = () => {
         },
     }));
 
+    const handle = (e) => {
+        if (e.key === 'Enter') {
+           store.login(email, password);
+        }
+    };
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {store} = useContext(Context);
@@ -62,6 +68,7 @@ const LoginForm = () => {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
+                        onKeyDown={handle}
                         onChange={event => setEmail(event.target.value)}
                         value={email}
                         variant="outlined"
@@ -75,6 +82,7 @@ const LoginForm = () => {
                         autoFocus
                     />
                     <TextField
+                        onKeyDown={handle}
                         onChange={event => setPassword(event.target.value)}
                         value={password}
                         variant="outlined"
@@ -102,11 +110,6 @@ const LoginForm = () => {
                         Sign In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
                                 {"Don't have an account? Sign Up"}
