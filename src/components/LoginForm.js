@@ -109,7 +109,7 @@ const LoginForm = () => {
                         label="Remember me"
                     />
                     <Button
-                        onClick={() => store.login(email, password)}
+                        onClick={() => store.authenticate(email, password, auth)}
                         type="button"
                         fullWidth
                         variant="contained"

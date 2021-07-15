@@ -4,6 +4,7 @@ import {Context} from "./index";
 import {useContext, useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import Header from "./components/Header";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const App = () => {
     const {store} = useContext(Context);
@@ -14,7 +15,7 @@ const App = () => {
     }, []);
 
     if (store.isLoading) {
-        return <div>Loading...</div>
+        return <LinearProgress />
     }
 
 

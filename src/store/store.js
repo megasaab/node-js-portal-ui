@@ -25,6 +25,15 @@ export default class Store {
         this.isLoading = bool;
     };
 
+
+    async authenticate(email, password, auth) {
+        if (!auth) {
+            await this.login(email , password)
+        } else {
+            await this.registration(email, password)
+            alert('Registered!');
+        }
+    }
     async login(email, password) {
         try {
             const response = await AuthService.login(String(email.trim()), String(password.trim()));
