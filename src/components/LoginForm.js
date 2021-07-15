@@ -46,6 +46,10 @@ const LoginForm = () => {
         submit: {
             margin: theme.spacing(3, 0, 2),
         },
+
+        signIn: {
+            textAlign: 'center',
+        }
     }));
 
     const handle = (e) => {
@@ -54,8 +58,13 @@ const LoginForm = () => {
         }
     };
 
+    const setAuth = () => {
+        auth ? setAuthState(false) : setAuthState(true);
+    }
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [auth, setAuthState] = useState(false);
     const {store} = useContext(Context);
     const classes = useStyles();
 
@@ -64,7 +73,7 @@ const LoginForm = () => {
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    {auth ? 'Registration' : 'Sign in'}
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -107,12 +116,12 @@ const LoginForm = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                       {auth ? "Sign Up" : "Sign In"}
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Link onClick={() => setAuth()}>
+                                {auth ? "Sign In" : "Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
                     </Grid>
